@@ -1,6 +1,7 @@
 /*
- * BFS graph traversal using adjacency list to store the graph
+ * BFS graph traversal using adjacency matrix to store the graph
 */
+
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -9,13 +10,13 @@
 using namespace std;
 
 struct graph {
-    vector<list<int>> adj;
+    int **adj;
     int vertex;
 };
 
 void add_edge(graph &G, int x, int y){
-    G.adj[x].push_back(y);
-    G.adj[y].push_back(x);
+    G.adj[x][y] = 1;
+    G.adj[y][x] = 1;
 }
 
 void bfs(graph &G, int start) {
@@ -28,10 +29,11 @@ void bfs(graph &G, int start) {
         int temp_node = q.front();
         cout<<temp_node<<endl;
         q.pop();
-        for(auto i = G.adj[temp_node].begin(); i != G.adj[temp_node].end(); i++) {
-            if(!visited[*i]){
-                visited[*i] = true;
-                q.push(*i);
+        
+        for(int i=0; i<G.vertex;i++)
+            if(!visited[i] && g.adj[temp_node][i] == 1){
+                visited[i] = true;
+                q.push(i);
             }
         }
     }
@@ -40,8 +42,11 @@ int main()
 {
    graph g;
    //Initialize
-   g.adj.resize(5);
    g.vertex = 5;
+   g.adj = (int**)malloc(g.vertex*sizeof(inti*));
+   for (int i = 0; i < g.vertex; i++) {
+        g.adj[i] = (int*)malloc(g.vertex * sizeof(int));
+    }
 
    add_edge(g, 0, 1);
    add_edge(g, 0, 4);

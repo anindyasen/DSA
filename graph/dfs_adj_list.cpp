@@ -1,5 +1,6 @@
+
 /*
- * BFS graph traversal using adjacency list to store the graph
+ * DFS graph traversal using adjacency list to store the graph
 */
 #include <iostream>
 #include <vector>
@@ -18,23 +19,20 @@ void add_edge(graph &G, int x, int y){
     G.adj[y].push_back(x);
 }
 
-void bfs(graph &G, int start) {
-    bool visited[G.vertex];
-    queue<int> q;
-    visited[start] = true;
-    q.push(start);
-    
-    while(!q.empty()){
-        int temp_node = q.front();
-        cout<<temp_node<<endl;
-        q.pop();
-        for(auto i = G.adj[temp_node].begin(); i != G.adj[temp_node].end(); i++) {
-            if(!visited[*i]){
-                visited[*i] = true;
-                q.push(*i);
-            }
+void dfs(graph &G, int node, vector<bool> &visited) {
+   visited[node] = true;
+   cout<<node<<endl;
+   for(auto i=G.adj[node].begin(); i != G.adj[node].end(); i++ ){
+        if(!visited[*i]){
+            dfs(G, *i, visited);
+
         }
-    }
+   } 
+}
+
+void bfs(graph &G, int start) {
+    vector<bool> visited(G.vertex, false);
+    dfs(G,start,visited);
 }
 int main()
 {
