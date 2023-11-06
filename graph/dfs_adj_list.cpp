@@ -30,10 +30,11 @@ void dfs(graph &G, int node, vector<bool> &visited) {
    } 
 }
 
-void bfs(graph &G, int start) {
+void graph_traversal(graph &G, int start) {
     vector<bool> visited(G.vertex, false);
     dfs(G,start,visited);
 }
+
 int main()
 {
    graph g;
@@ -48,5 +49,5 @@ int main()
    add_edge(g, 1, 2);
    add_edge(g, 2, 3);
    add_edge(g, 3, 4);
-   bfs(g, 0);
+   graph_traversal(g, 0);
 }
