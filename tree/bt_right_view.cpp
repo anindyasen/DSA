@@ -65,26 +65,26 @@ node_t * insert(node_t  *root, int data) {
 vector<int> rightSideView(TreeNode* root) {
     vector<int> res;
     list<TreeNode *> q;
-    int s = 1; //no. of element on each level
     q.push_back(root);
 
     while(!q.empty()) {
-        TreeNode *t = q.front();
-        q.pop_front();
-        s--;
+    	int count = q.size(); //no. of element on each level
+	    for(int i =0;i<count;i++){
+	         TreeNode *t = q.front();
+	         q.pop_front();
 
-        if(t && t->left){
-            q.push_back(t->left);
-        }
+	         if(t && t->left){
+	         	q.push_back(t->left);
+	         }
 
-        if(t && t->right){
-            q.push_back(t->right);
-        }
-        
-        if(t && (s==0)){   
-            res.push_back(t->val);
-            s = q.size();
-        }
+	         if(t && t->right){
+	         	q.push_back(t->right);
+	         }
+
+	         if(t && (i==count - 1)){   
+	         	res.push_back(t->val);
+	         }
+	    }
     } 
     return res;
 }
