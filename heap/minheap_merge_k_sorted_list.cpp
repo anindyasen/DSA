@@ -12,11 +12,10 @@
     Output:
     1 1 2 3 4 4 5 6
 
-    Time Complexity: O(N*K*log K), As outer while loop in function mergeKLists() runs 
-    log K times and every time it processes N*K elements.
+    Time Complexity: O(N*K*log K), Max element in heap at a time is K. So, heapify in log(K).
+        As, we insert total N*K elements so, complexity is O(N*K*log K)
     
-    Auxiliary Space: O(N*K), Because recursion is used in SortedMerge() and to merge 
-    the final 2 linked lists of size N/2, N recursive calls will be made.
+    Auxiliary Space: O(K). The heap data structure will have max K elements at a time.
 */
 
 #include <bits/stdc++.h>
